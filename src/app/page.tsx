@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import dynamic from "next/dynamic";
 import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/navigation/Footer";
 import { ExperienceHero } from "@/components/hero/ExperienceHero";
-import { BodyWeatherAtmosphere } from "@/components/weather/BodyWeatherAtmosphere";
 import { FeaturedCategories } from "@/components/categories/FeaturedCategories";
 import { TrendingProducts } from "@/components/products/TrendingProducts";
 import { CinematicProductStory } from "@/components/story/CinematicProductStory";
@@ -20,44 +19,36 @@ import { RecentlyViewed } from "@/components/products/RecentlyViewed";
 import { TrustSection } from "@/components/story/TrustSection";
 import { FinalCTA } from "@/components/story/FinalCTA";
 
-// Dynamically import Galaxy WebGL shader background (Client Side Only)
-const Galaxy = dynamic(() => import("@/components/bg/Galaxy"), { ssr: false });
+// Dynamically import Prism WebGL shader background (Client Side Only)
+const Prism = dynamic(() => import("@/components/bg/Prism"), { ssr: false });
 
 export default function HomePage() {
-  const [, setActiveSlideIndex] = useState(0);
-
   return (
     <main className="relative min-h-screen bg-[#0a090c] text-white selection:bg-amber-500 selection:text-black transition-all duration-700">
       
-      {/* Fixed Galaxy Shader Canvas in Background */}
+      {/* Fixed Prism Shader Canvas in Background */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-85">
-        <Galaxy
-          mouseRepulsion={true}
-          mouseInteraction={true}
-          density={1}
-          glowIntensity={0.35}
-          saturation={0}
-          hueShift={140}
-          twinkleIntensity={0.35}
-          rotationSpeed={0.08}
-          repulsionStrength={2}
-          autoCenterRepulsion={0}
-          starSpeed={0.5}
-          speed={1}
+        <Prism
+          animationType="rotate"
+          timeScale={0.5}
+          height={3.5}
+          baseWidth={5.5}
+          scale={3.6}
+          hueShift={0}
+          colorFrequency={1}
+          noise={0}
+          glow={1}
           transparent={false}
           lightMode={false}
         />
       </div>
-
-      {/* Dynamic Ambient Weather Canvas Overlay */}
-      <BodyWeatherAtmosphere />
 
       {/* Sticky Glassmorphic Navbar */}
       <Navbar />
 
       {/* Hero Region */}
       <div className="relative z-10">
-        <ExperienceHero onSlideChange={setActiveSlideIndex} />
+        <ExperienceHero />
       </div>
 
       {/* Homepage Commerce Sections */}
