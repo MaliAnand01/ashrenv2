@@ -3,72 +3,73 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import { Navbar } from "@/components/navigation/Navbar";
-import { Footer } from "@/components/navigation/Footer";
 import { ExperienceHero } from "@/components/hero/ExperienceHero";
-import { FeaturedCategories } from "@/components/categories/FeaturedCategories";
-import { TrendingProducts } from "@/components/products/TrendingProducts";
-import { CinematicProductStory } from "@/components/story/CinematicProductStory";
-import { ShopByCategory } from "@/components/categories/ShopByCategory";
 import { CreatorReels } from "@/components/reels/CreatorReels";
-import { NewArrivals } from "@/components/products/NewArrivals";
-import { PersonalizedRecommendations } from "@/components/products/PersonalizedRecommendations";
-import { BestSellers } from "@/components/products/BestSellers";
-import { LimitedDeals } from "@/components/products/LimitedDeals";
-import { BrandValues } from "@/components/story/BrandValues";
-import { RecentlyViewed } from "@/components/products/RecentlyViewed";
-import { TrustSection } from "@/components/story/TrustSection";
-import { FinalCTA } from "@/components/story/FinalCTA";
+import { AnimatedCategories } from "@/components/categories/AnimatedCategories";
+import { FeaturedProducts } from "@/components/products/FeaturedProducts";
+import { TestimonialsMarquee } from "@/components/testimonials/TestimonialsMarquee";
+import { CinematicFooter } from "@/components/navigation/CinematicFooter";
 
-// Dynamically import Prism WebGL shader background (Client Side Only)
-const Prism = dynamic(() => import("@/components/bg/Prism"), { ssr: false });
+// Dynamically import LightRays WebGL shader as full-page background (Client Side Only)
+const LightRays = dynamic(() => import("@/components/bg/LightRays"), {
+  ssr: false,
+});
 
 export default function HomePage() {
   return (
-    <main className="relative min-h-screen bg-[#0a090c] text-white selection:bg-amber-500 selection:text-black transition-all duration-700">
+    <main className="relative min-h-screen bg-[#07070a] text-white selection:bg-amber-500 selection:text-black overflow-x-hidden">
       
-      {/* Fixed Prism Shader Canvas in Background */}
-      <div className="fixed inset-0 z-0 pointer-events-none opacity-85">
-        <Prism
-          animationType="rotate"
-          timeScale={0.5}
-          height={3.5}
-          baseWidth={5.5}
-          scale={3.6}
-          hueShift={0}
-          colorFrequency={1}
-          noise={0}
-          glow={1}
-          transparent={false}
-          lightMode={false}
+      {/* Fixed LightRays WebGL Shader in Background (Lag-Free & Smooth) */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-75 overflow-hidden">
+        <LightRays
+          raysOrigin="top-center"
+          raysColor="#ffffff"
+          raysSpeed={1}
+          lightSpread={0.55}
+          rayLength={3}
+          followMouse={true}
+          mouseInfluence={0.12}
+          noiseAmount={0}
+          distortion={0}
+          pulsating={false}
+          fadeDistance={1}
+          saturation={1}
         />
       </div>
 
       {/* Sticky Glassmorphic Navbar */}
       <Navbar />
 
-      {/* Hero Region */}
-      <div className="relative z-10">
+      {/* 1. Hero Section (Rock Pedestal + Left-Right Slider) */}
+      <div className="relative z-10 bg-transparent">
         <ExperienceHero />
       </div>
 
-      {/* Homepage Commerce Sections */}
-      <div className="relative z-10 space-y-4">
-        <FeaturedCategories />
-        <TrendingProducts />
-        <CinematicProductStory />
-        <ShopByCategory />
+      {/* 2. Reels Section (Transparent Background) */}
+      <div className="relative z-10 bg-transparent">
         <CreatorReels />
-        <NewArrivals />
-        <PersonalizedRecommendations />
-        <BestSellers />
-        <LimitedDeals />
-        <BrandValues />
-        <RecentlyViewed />
-        <TrustSection />
-        <FinalCTA />
       </div>
 
-      <Footer />
+      {/* 3. Animated Categories Section (Transparent Background) */}
+      <div className="relative z-10 bg-transparent">
+        <AnimatedCategories />
+      </div>
+
+      {/* 4. Featured Products Section (Transparent Background) */}
+      <div className="relative z-10 bg-transparent">
+        <FeaturedProducts />
+      </div>
+
+      {/* 5. Testimonial Cards 2-Way Animated Marquee (Transparent Background) */}
+      <div className="relative z-10 bg-transparent">
+        <TestimonialsMarquee />
+      </div>
+
+      {/* 6. Cinematic Footer (Transparent Background) */}
+      <div className="relative z-10 bg-transparent">
+        <CinematicFooter />
+      </div>
+
     </main>
   );
 }

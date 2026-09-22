@@ -11,6 +11,11 @@ import {
 import { Product, ASHREN_PRODUCTS } from "@/data/products";
 import { CreatorReel } from "@/data/creators";
 
+export interface CartItem {
+  product: Product;
+  quantity: number;
+}
+
 interface StoreContextType {
   weatherState: WeatherStateId;
   setWeatherState: (state: WeatherStateId) => void;
@@ -20,7 +25,16 @@ interface StoreContextType {
   setIsWeatherAuto: (auto: boolean) => void;
   requestLiveLocation: () => Promise<void>;
   
-  // E-commerce interactions
+  // Cart
+  cart: CartItem[];
+  addToCart: (product: Product, quantity?: number) => void;
+  removeFromCart: (productId: string) => void;
+  updateCartQuantity: (productId: string, quantity: number) => void;
+  clearCart: () => void;
+  cartTotal: number;
+  cartCount: number;
+
+  // Wishlist
   wishlist: string[];
   toggleWishlist: (productId: string) => void;
   isInWishlist: (productId: string) => boolean;
@@ -51,6 +65,12 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   const [userLocation, setUserLocation] = useState<UserLocation>(DEFAULT_LOCATION);
   const [isWeatherAuto, setIsWeatherAuto] = useState<boolean>(true);
   
+  // Cart initialized with a default item for instant demo
+  const [cart, setCart] = useState<CartItem[]>([
+    { product: ASHREN_PRODUCTS[0], quantity: 1 },
+    { product: ASHREN_PRODUCTS[1], quantity: 1 },
+  ]);
+
   const [wishlist, setWishlist] = useState<string[]>(["prod-01", "prod-05"]);
   const [recentlyViewedIds, setRecentlyViewedIds] = useState<string[]>(["prod-03", "prod-02", "prod-06"]);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -59,10 +79,51 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   const [activeReel, setActiveReel] = useState<CreatorReel | null>(null);
   const [conciergeOpen, setConciergeOpen] = useState(false);
 
+  // Cart operations
+  const addToCart = useCallback((product: Product, quantity = 1) => {
+    setCart((prev) => {
+      const existing = prev.find((item) => item.product.id === product.id);
+      if (existing) {
+        return prev.map((item) =>
+          item.product.id === product.id
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
+        );
+      }
+      return [...prev, { product, quantity }];
+    });
+  }, []);
+
+  const removeFromCart = useCallback((productId: string) => {
+    setCart((prev) => prev.filter((item) => item.product.id !== productId));
+  }, []);
+
+  const updateCartQuantity = useCallback((productId: string, quantity: number) => {
+    if (quantity <= 0) {
+      removeFromCart(productId);
+      return;
+    }
+    setCart((prev) =>
+      prev.map((item) =>
+        item.product.id === productId ? { ...item, quantity } : item
+      )
+    );
+  }, [removeFromCart]);
+
+  const clearCart = useCallback(() => {
+    setCart([]);
+  }, []);
+
+  const cartTotal = cart.reduce(
+    (sum, item) => sum + item.product.price * item.quantity,
+    0
+  );
+
+  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
   // Derive atmosphere
   const atmosphere = WEATHER_ATMOSPHERES[weatherState] || WEATHER_ATMOSPHERES.CLEAR_DAY;
 
-  // Custom setter that can override auto
   const setWeatherState = useCallback((state: WeatherStateId) => {
     setIsWeatherAuto(false);
     setWeatherStateInternal(state);
@@ -77,7 +138,6 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
       async (pos) => {
         const { latitude, longitude } = pos.coords;
         try {
-          // Attempt reverse geocoding via free public API or approximate
           const geoRes = await fetch(
             `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
           );
@@ -87,8 +147,8 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
             geoData.address?.town ||
             geoData.address?.suburb ||
             geoData.address?.state_district ||
-            "Local City";
-          const state = geoData.address?.state || "";
+            "Jaipur";
+          const state = geoData.address?.state || "Rajasthan";
 
           setUserLocation({
             city,
@@ -107,7 +167,6 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
           );
           setWeatherStateInternal(derivedState);
         } catch {
-          // Fallback location
           setUserLocation({
             city: "Jaipur",
             region: "Rajasthan",
@@ -119,15 +178,13 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
         }
       },
       (error) => {
-        console.warn("Geolocation denied or unavailable:", error.message);
-        // Retain default Jaipur
+        console.warn("Geolocation fallback:", error.message);
       },
       { timeout: 8000 }
     );
   }, []);
 
   useEffect(() => {
-    // Initial silent check on mount
     requestLiveLocation();
   }, [requestLiveLocation]);
 
@@ -163,6 +220,13 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
         isWeatherAuto,
         setIsWeatherAuto,
         requestLiveLocation,
+        cart,
+        addToCart,
+        removeFromCart,
+        updateCartQuantity,
+        clearCart,
+        cartTotal,
+        cartCount,
         wishlist,
         toggleWishlist,
         isInWishlist,

@@ -20,13 +20,14 @@ import {
   Gem,
   Scissors,
   Headphones,
+  ShoppingBag,
   Compass,
 } from "lucide-react";
 import { POPULAR_INDIAN_HUBS } from "@/lib/experience/locationService";
 
 export function Navbar() {
   const { userContext, setUserCity } = useExperience();
-  const { wishlist, setSearchOpen, setConciergeOpen } = useStore();
+  const { wishlist, cartCount, setSearchOpen, setConciergeOpen } = useStore();
 
   const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
   const [categoriesMenuOpen, setCategoriesMenuOpen] = useState(false);
@@ -156,100 +157,37 @@ export function Navbar() {
             </button>
           </div>
 
-          {/* ================= RIGHT: CATEGORY LINK, PROFILE & WHATSAPP ================= */}
-          <div className="flex items-center gap-3 shrink-0">
-            {/* Category Dropdown Link */}
-            <div
-              className="relative hidden lg:block"
-              onMouseEnter={handleMouseEnterCategories}
-              onMouseLeave={handleMouseLeaveCategories}
+          {/* ================= RIGHT: LINKS, CART, PROFILE & WHATSAPP ================= */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* Direct Shop Link */}
+            <Link
+              href="/shop"
+              className="hidden md:inline-flex text-xs uppercase tracking-wider font-mono font-semibold text-white/90 hover:text-amber-400 transition-colors py-1.5 px-2"
             >
-              <button
-                onClick={() => setCategoriesMenuOpen(!categoriesMenuOpen)}
-                className="flex items-center gap-1 text-xs uppercase tracking-wider font-sans font-semibold text-white/90 hover:text-amber-400 transition-colors py-2 group"
-              >
-                <span>Categories</span>
-                <ChevronDown className={`w-3.5 h-3.5 text-white/50 group-hover:text-amber-400 transition-transform ${categoriesMenuOpen ? "rotate-180" : ""}`} />
-              </button>
+              Shop
+            </Link>
 
-              {/* Mega Dropdown */}
-              {categoriesMenuOpen && (
-                <div className="absolute right-0 top-full mt-2 w-[720px] bg-[#121016]/95 border border-white/15 rounded-2xl shadow-2xl p-5 z-50 animate-fade-in backdrop-blur-2xl">
-                  <div className="grid grid-cols-4 gap-5 pb-4 border-b border-white/10">
-                    
-                    {/* Col 1: Gold Jewellery */}
-                    <div className="space-y-2.5">
-                      <div className="flex items-center gap-1.5 text-amber-400 font-serif font-bold text-xs">
-                        <Gem className="w-3.5 h-3.5 text-amber-400" />
-                        <span>Gold Jewellery</span>
-                      </div>
-                      <ul className="space-y-1.5 text-[11px] font-sans text-white/80">
-                        <li><Link href="#shop" className="hover:text-amber-400">22K Kundan Chokers</Link></li>
-                        <li><Link href="#shop" className="hover:text-amber-400">Real Polki Necklaces</Link></li>
-                        <li><Link href="#shop" className="hover:text-amber-400">Gold Bangles & Kadas</Link></li>
-                        <li><Link href="#shop" className="hover:text-amber-400">Diamond Rings</Link></li>
-                      </ul>
-                    </div>
+            {/* Direct About Link */}
+            <Link
+              href="/about"
+              className="hidden lg:inline-flex text-xs uppercase tracking-wider font-mono font-semibold text-white/90 hover:text-amber-400 transition-colors py-1.5 px-2"
+            >
+              About
+            </Link>
 
-                    {/* Col 2: Bridal & Sarees */}
-                    <div className="space-y-2.5">
-                      <div className="flex items-center gap-1.5 text-amber-400 font-serif font-bold text-xs">
-                        <Scissors className="w-3.5 h-3.5 text-amber-400" />
-                        <span>Bridal & Sarees</span>
-                      </div>
-                      <ul className="space-y-1.5 text-[11px] font-sans text-white/80">
-                        <li><Link href="#shop" className="hover:text-amber-400">Heavy Bridal Anarkalis</Link></li>
-                        <li><Link href="#shop" className="hover:text-amber-400">Pure Silk Sarees</Link></li>
-                        <li><Link href="#shop" className="hover:text-amber-400">Wedding Sherwanis</Link></li>
-                        <li><Link href="#shop" className="hover:text-amber-400">Custom Stitching</Link></li>
-                      </ul>
-                    </div>
-
-                    {/* Col 3: Studio Headphones */}
-                    <div className="space-y-2.5">
-                      <div className="flex items-center gap-1.5 text-amber-400 font-serif font-bold text-xs">
-                        <Headphones className="w-3.5 h-3.5 text-amber-400" />
-                        <span>Studio Headphones</span>
-                      </div>
-                      <ul className="space-y-1.5 text-[11px] font-sans text-white/80">
-                        <li><Link href="#shop" className="hover:text-amber-400">Pro Studio Headphones</Link></li>
-                        <li><Link href="#shop" className="hover:text-amber-400">In-Ear Monitors</Link></li>
-                        <li><Link href="#shop" className="hover:text-amber-400">Audio Amplifiers</Link></li>
-                        <li><Link href="#shop" className="hover:text-amber-400">Sound Gear</Link></li>
-                      </ul>
-                    </div>
-
-                    {/* Col 4: Camera Drones */}
-                    <div className="space-y-2.5">
-                      <div className="flex items-center gap-1.5 text-amber-400 font-serif font-bold text-xs">
-                        <Compass className="w-3.5 h-3.5 text-amber-400" />
-                        <span>Camera Drones</span>
-                      </div>
-                      <ul className="space-y-1.5 text-[11px] font-sans text-white/80">
-                        <li><Link href="#shop" className="hover:text-amber-400">4K Video Drones</Link></li>
-                        <li><Link href="#shop" className="hover:text-amber-400">Gimbal Stabilizers</Link></li>
-                        <li><Link href="#shop" className="hover:text-amber-400">Gaming Rigs</Link></li>
-                        <li><Link href="#shop" className="hover:text-amber-400">Drone Accessories</Link></li>
-                      </ul>
-                    </div>
-
-                  </div>
-
-                  <div className="pt-2.5 flex items-center justify-between text-[10px] font-sans text-white/60">
-                    <span>Direct Karigar Sourcing • Safe Delivery across India</span>
-                    <Link href="#shop" onClick={() => setCategoriesMenuOpen(false)} className="text-amber-400 font-bold hover:underline flex items-center gap-1">
-                      See All Products <ArrowRight className="w-2.5 h-2.5" />
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
+            {/* Direct Contact Link */}
+            <Link
+              href="/contact"
+              className="hidden lg:inline-flex text-xs uppercase tracking-wider font-mono font-semibold text-white/90 hover:text-amber-400 transition-colors py-1.5 px-2"
+            >
+              Contact
+            </Link>
 
             {/* Profile */}
             <Link
-              href="/admin"
+              href="/profile"
               className="p-2 rounded-full text-white/90 hover:bg-white/10 transition-colors"
-              title="Profile & Account"
+              title="Profile & Orders"
             >
               <User className="w-4 h-4 text-white" />
             </Link>
@@ -258,14 +196,29 @@ export function Navbar() {
             <button
               onClick={() => setSearchOpen(true)}
               className="relative p-2 rounded-full text-white/90 hover:bg-white/10 transition-colors"
+              title="Wishlist"
             >
               <Heart className="w-4 h-4 text-white" />
               {wishlist.length > 0 && (
-                <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-amber-500 text-black text-[10px] font-bold flex items-center justify-center">
+                <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-rose-500 text-white text-[10px] font-bold flex items-center justify-center">
                   {wishlist.length}
                 </span>
               )}
             </button>
+
+            {/* Shopping Cart Bag */}
+            <Link
+              href="/cart"
+              className="relative p-2 rounded-full text-white/90 hover:bg-white/10 transition-colors"
+              title="Shopping Bag"
+            >
+              <ShoppingBag className="w-4 h-4 text-white" />
+              {cartCount > 0 && (
+                <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-amber-500 text-black text-[10px] font-bold flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
 
             {/* WhatsApp Order Button */}
             <button
@@ -273,7 +226,7 @@ export function Navbar() {
               className="hidden sm:flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-full bg-amber-500 hover:bg-amber-400 text-black transition-all shadow-md active:scale-95 shrink-0"
             >
               <MessageCircle className="w-3.5 h-3.5 fill-black" />
-              <span>WhatsApp Order</span>
+              <span>WhatsApp</span>
             </button>
 
             {/* Mobile Hamburger */}
@@ -317,18 +270,25 @@ export function Navbar() {
           </div>
 
           <div className="flex flex-col space-y-2 text-xs font-semibold uppercase tracking-wider text-white pt-2">
-            <Link href="#shop" onClick={() => setMobileMenuOpen(false)} className="py-1 hover:text-amber-400">Gold Jewellery</Link>
-            <Link href="#shop" onClick={() => setMobileMenuOpen(false)} className="py-1 hover:text-amber-400">Bridal & Sarees</Link>
-            <Link href="#shop" onClick={() => setMobileMenuOpen(false)} className="py-1 hover:text-amber-400">Studio Headphones</Link>
-            <Link href="#shop" onClick={() => setMobileMenuOpen(false)} className="py-1 hover:text-amber-400">Camera Drones</Link>
+            <Link href="/shop" onClick={() => setMobileMenuOpen(false)} className="py-1 hover:text-amber-400">All Products</Link>
+            <Link href="/shop?category=Tech+%26+Gadgets" onClick={() => setMobileMenuOpen(false)} className="py-1 hover:text-amber-400">Tech & Gadgets</Link>
+            <Link href="/shop?category=Royalty+Jewellery" onClick={() => setMobileMenuOpen(false)} className="py-1 hover:text-amber-400">Royalty Jewellery</Link>
+            <Link href="/shop?category=Haute+Clothing" onClick={() => setMobileMenuOpen(false)} className="py-1 hover:text-amber-400">Haute Clothing</Link>
+            <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="py-1 hover:text-amber-400">Our Heritage</Link>
+            <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="py-1 hover:text-amber-400">Contact Studio</Link>
+            <Link href="/cart" onClick={() => setMobileMenuOpen(false)} className="py-1 hover:text-amber-400 flex items-center justify-between">
+              <span>Shopping Bag</span>
+              {cartCount > 0 && <span className="px-2 py-0.5 rounded-full bg-amber-500 text-black text-[10px] font-bold">{cartCount}</span>}
+            </Link>
+            <Link href="/profile" onClick={() => setMobileMenuOpen(false)} className="py-1 hover:text-amber-400">My Profile</Link>
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
                 setConciergeOpen(true);
               }}
-              className="text-left text-amber-400 font-bold py-1 flex items-center gap-1.5"
+              className="text-left text-amber-400 font-bold py-1.5 flex items-center gap-1.5 pt-2 border-t border-white/10"
             >
-              <MessageCircle className="w-4 h-4" />
+              <MessageCircle className="w-4 h-4 fill-amber-400" />
               <span>Order on WhatsApp</span>
             </button>
           </div>
