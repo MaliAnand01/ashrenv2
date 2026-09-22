@@ -312,20 +312,29 @@ export function Navbar() {
                 )}
               </button>
 
-              {/* Wishlist Quick Dropdown (100% Opaque to prevent bleed-through) */}
+              {/* Wishlist Quick Dropdown (100% Opaque & Responsively Centered on Mobile) */}
               {wishlistDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-80 max-w-[calc(100vw-2rem)] bg-[#0d0f17] border border-white/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.95)] p-4 z-50 animate-fade-in space-y-3">
+                <div className="fixed sm:absolute top-16 sm:top-full left-4 right-4 sm:left-auto sm:right-0 sm:w-80 mt-2 bg-[#0d0f17] border border-white/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.95)] p-4 z-50 animate-fade-in space-y-3">
                   <div className="flex items-center justify-between pb-2 border-b border-white/10">
                     <span className="font-mono text-xs uppercase font-bold text-amber-400">
                       Saved Wishlist ({wishlistProducts.length})
                     </span>
-                    <Link
-                      href="/shop"
-                      onClick={() => setWishlistDropdownOpen(false)}
-                      className="text-[11px] text-white/50 hover:text-white"
-                    >
-                      Browse More
-                    </Link>
+                    <div className="flex items-center gap-2">
+                      <Link
+                        href="/shop"
+                        onClick={() => setWishlistDropdownOpen(false)}
+                        className="text-[11px] text-white/50 hover:text-white"
+                      >
+                        Browse More
+                      </Link>
+                      <button
+                        onClick={() => setWishlistDropdownOpen(false)}
+                        className="sm:hidden p-1 text-white/50 hover:text-white rounded-lg hover:bg-white/10"
+                        title="Close Wishlist"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
                   </div>
 
                   {wishlistProducts.length === 0 ? (
