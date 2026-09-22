@@ -71,8 +71,8 @@ export function FeaturedProducts() {
           })}
         </div>
 
-        {/* Product Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {/* Product Cards: Horizontal Carousel on Mobile, Grid on Desktop */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-6 sm:overflow-visible sm:pb-0 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
           {filteredProducts.map((product) => {
             const inWishlist = isInWishlist(product.id);
             const isJustAdded = addedId === product.id;
@@ -80,7 +80,7 @@ export function FeaturedProducts() {
             return (
               <div
                 key={product.id}
-                className="group relative rounded-2xl bg-white/[0.02] border border-white/10 hover:border-amber-400/40 p-5 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 shadow-md hover:shadow-xl"
+                className="group relative w-[280px] sm:w-auto flex-shrink-0 snap-center sm:snap-align-none rounded-2xl bg-[#0e1017]/90 sm:bg-white/[0.02] border border-white/10 hover:border-amber-400/40 p-5 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 shadow-md hover:shadow-xl"
               >
                 {/* Top Bar: Category & Wishlist Button */}
                 <div className="flex items-center justify-between mb-3 z-10">

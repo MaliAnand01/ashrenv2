@@ -65,7 +65,7 @@ export function Navbar() {
   const wishlistProducts = ASHREN_PRODUCTS.filter((p) => wishlist.includes(p.id));
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#0a090c]/80 backdrop-blur-xl border-b border-white/10 text-white transition-colors duration-300">
+    <header className="sticky top-0 z-50 relative w-full bg-[#0a090c]/95 backdrop-blur-xl border-b border-white/10 text-white transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="h-16 sm:h-18 flex items-center justify-between gap-4">
           
@@ -312,9 +312,9 @@ export function Navbar() {
                 )}
               </button>
 
-              {/* Wishlist Quick Dropdown */}
+              {/* Wishlist Quick Dropdown (100% Opaque to prevent bleed-through) */}
               {wishlistDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-80 bg-[#121016]/98 border border-white/15 rounded-2xl shadow-2xl p-4 z-50 animate-fade-in backdrop-blur-2xl space-y-3">
+                <div className="absolute right-0 mt-2 w-80 max-w-[calc(100vw-2rem)] bg-[#0d0f17] border border-white/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.95)] p-4 z-50 animate-fade-in space-y-3">
                   <div className="flex items-center justify-between pb-2 border-b border-white/10">
                     <span className="font-mono text-xs uppercase font-bold text-amber-400">
                       Saved Wishlist ({wishlistProducts.length})
@@ -435,9 +435,9 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer - Absolute overlay with high z-index so it never pushes hero content down */}
       {mobileMenuOpen && (
-        <div className="w-full bg-[#121016]/98 border-b border-white/10 p-5 space-y-3 lg:hidden animate-fade-in backdrop-blur-xl">
+        <div className="absolute top-full left-0 right-0 w-full bg-[#0d0f17] border-b border-white/15 p-5 space-y-3 lg:hidden animate-fade-in shadow-[0_25px_50px_rgba(0,0,0,0.95)] max-h-[calc(100vh-4.5rem)] overflow-y-auto z-50">
           <div className="flex items-center justify-between pb-2 border-b border-white/10 text-xs font-mono text-white/70">
             <span>Delivering to {cityName} ({pincode})</span>
             <span className="font-bold text-amber-400 font-sans">Pan-India Insured</span>

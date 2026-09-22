@@ -44,8 +44,8 @@ export function CreatorReels() {
           </p>
         </div>
 
-        {/* Reels Horizontal / Responsive Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+        {/* Reels Horizontal Sliding on Mobile, Responsive Grid on Desktop */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 sm:grid sm:grid-cols-2 lg:grid-cols-5 sm:gap-5 sm:overflow-visible sm:pb-0 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
           {ASHREN_CREATOR_REELS.map((reel) => {
             const isLiked = likedReels[reel.id];
             const taggedProduct =
@@ -56,7 +56,7 @@ export function CreatorReels() {
               <div
                 key={reel.id}
                 onClick={() => setActiveReel(reel)}
-                className="group relative h-[460px] rounded-2xl overflow-hidden bg-[#121016] border border-white/10 hover:border-amber-400/40 cursor-pointer transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between shadow-xl"
+                className="group relative w-[270px] sm:w-auto h-[490px] sm:h-[460px] flex-shrink-0 snap-center sm:snap-align-none rounded-2xl overflow-hidden bg-[#121016] border border-white/10 hover:border-amber-400/40 cursor-pointer transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between shadow-xl"
               >
                 {/* Background Image / Reel Video Thumbnail */}
                 <div className="absolute inset-0 z-0">
