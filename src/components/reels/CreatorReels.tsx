@@ -25,7 +25,7 @@ export function CreatorReels() {
   };
 
   return (
-    <section id="reels" className="py-16 sm:py-24 bg-[#0a090c]/90 border-t border-white/5 relative z-10">
+    <section id="reels" className="py-16 sm:py-24 bg-transparent border-t border-white/5 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

@@ -33,7 +33,7 @@ export function FeaturedProducts() {
   };
 
   return (
-    <section id="shop" className="py-16 sm:py-24 bg-[#07070a] relative z-10 border-t border-white/5">
+    <section id="shop" className="py-16 sm:py-24 bg-transparent relative z-10 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

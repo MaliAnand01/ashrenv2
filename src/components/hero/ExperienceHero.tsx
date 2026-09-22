@@ -79,25 +79,7 @@ export function ExperienceHero() {
   }, []);
 
   return (
-    <section className="relative w-full min-h-[92vh] sm:min-h-[860px] bg-[#07070a] overflow-hidden flex flex-col justify-between select-none">
-      
-      {/* 1. BACKGROUND LIGHT RAYS CANVAS */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-85">
-        <LightRays
-          raysOrigin="top-center"
-          raysColor="#ffffff"
-          raysSpeed={1}
-          lightSpread={0.55}
-          rayLength={3}
-          followMouse={true}
-          mouseInfluence={0.12}
-          noiseAmount={0}
-          distortion={0}
-          pulsating={false}
-          fadeDistance={1}
-          saturation={1}
-        />
-      </div>
+    <section className="relative w-full min-h-[92vh] sm:min-h-[860px] bg-transparent overflow-hidden flex flex-col justify-between select-none">
 
       {/* 2. GIANT WATERMARK SLIDING BACKDROP TEXT */}
       <div className="absolute inset-0 flex items-center pointer-events-none z-5 overflow-hidden">

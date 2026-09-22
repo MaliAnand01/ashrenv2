@@ -16,7 +16,7 @@ import {
 
 export function CinematicFooter() {
   return (
-    <footer className="bg-[#050507] text-white border-t border-white/10 relative z-20">
+    <footer className="bg-black/60 backdrop-blur-md text-white border-t border-white/10 relative z-20">
       
       {/* Trust & Guarantee Ribbon */}
       <div className="border-b border-white/8 py-8 bg-white/[0.01]">

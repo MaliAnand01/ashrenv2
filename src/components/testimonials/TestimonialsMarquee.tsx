@@ -144,7 +144,7 @@ function TestimonialCard({ item }: { item: Testimonial }) {
 
 export function TestimonialsMarquee() {
   return (
-    <section className="py-16 sm:py-24 bg-[#0a090c] relative z-10 border-t border-white/5 overflow-hidden">
+    <section className="py-16 sm:py-24 bg-transparent relative z-10 border-t border-white/5 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
         
         {/* Header */}
