@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Space+Mono:wght@400;700&display=swap');
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+@import 'swiper/css/effect-fade';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-playfair: 'Playfair Display', Georgia, serif;
+  --font-outfit: 'Outfit', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* ASHREN Dark Editorial Theme */
+  --bg-canvas: #0a0b0d;
+  --bg-surface: #101216;
+  --bg-card: #14161c;
+  --bg-elevated: #1b1e26;
+  --text-primary: #f7f6f8;
+  --text-muted: #9c98a8;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+
+  /* Modern Luxury Accents */
+  --color-teal: #10858b;
+  --color-storm: #2c666e;
+  --color-frosted: #90ddf0;
+  --color-gold: #d4af37;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-outfit);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Soft Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #101216;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #363a45;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2c666e;
+}
+
+/* 3D Perspective Stage */
+.perspective-stage {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Dynamic Weather Background Transition */
+.weather-atmosphere-transition {
+  transition: background 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Subtle Rain Animation (Delicate, not obscuring product) */
+@keyframes rainDropSubtle {
+  0% {
+    transform: translateY(-20px) translateX(0);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: translateY(550px) translateX(-40px);
+    opacity: 0;
+  }
+}
+
+@keyframes rainDrop {
+  0% {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  85% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(105vh);
+    opacity: 0;
+  }
+}
+
+.animate-rain-drop {
+  animation-name: rainDrop;
+  animation-timing-function: linear;
+}
+
+.rain-particle {
+  position: absolute;
+  width: 1.5px;
+  height: 22px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(44, 102, 110, 0.7));
+  animation: rainDropSubtle 1.1s linear infinite;
+}
+
+/* Floating Platform 3D animation */
+@keyframes platformFloat {
+  0%, 100% {
+    transform: translateY(0px) rotateX(62deg);
+  }
+  50% {
+    transform: translateY(-8px) rotateX(62deg);
+  }
+}
+
+.floating-platform {
+  animation: platformFloat 6.5s ease-in-out infinite;
+}
+
+/* Lightning flash effect */
+@keyframes lightningFlashSubtle {
+  0%, 94%, 98%, 100% {
+    opacity: 0;
+  }
+  95% {
+    opacity: 0.35;
+  }
+}
+
+.lightning-effect {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 65% 30%, rgba(144, 221, 240, 0.4), transparent 70%);
+  pointer-events: none;
+  animation: lightningFlashSubtle 9s infinite;
+}
+
+/* Apple-style Soft Luxury Card */
+.apple-card {
+  background: #14161c;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4), 0 2px 6px -1px rgba(0, 0, 0, 0.25);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease;
+}
+
+.apple-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -10px rgba(16, 133, 139, 0.25), 0 4px 10px -2px rgba(0, 0, 0, 0.4);
+  border-color: rgba(44, 102, 110, 0.4);
+}

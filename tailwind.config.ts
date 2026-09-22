@@ -1,0 +1,126 @@
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  darkMode: ["class"],
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/lib/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        onyx: {
+          DEFAULT: "#0a090c",
+          100: "#020202",
+          200: "#040405",
+          300: "#060507",
+          400: "#080709",
+          500: "#0a090c",
+          600: "#383343",
+          700: "#675d7b",
+          800: "#998fab",
+          900: "#ccc7d5",
+        },
+        platinum: {
+          DEFAULT: "#f0edee",
+          100: "#342c2f",
+          200: "#69575d",
+          300: "#9a868c",
+          400: "#c5babe",
+          500: "#f0edee",
+          600: "#f4f2f2",
+          700: "#f7f5f6",
+          800: "#f9f8f9",
+          900: "#fcfcfc",
+        },
+        dark_teal: {
+          DEFAULT: "#07393c",
+          100: "#010b0c",
+          200: "#031718",
+          300: "#042224",
+          400: "#062d2f",
+          500: "#07393c",
+          600: "#10858b",
+          700: "#1ad1da",
+          800: "#60e5ec",
+          900: "#b0f2f6",
+        },
+        stormy_teal: {
+          DEFAULT: "#2c666e",
+          100: "#091416",
+          200: "#11292c",
+          300: "#1a3d42",
+          400: "#235158",
+          500: "#2c666e",
+          600: "#4095a0",
+          700: "#66b7c2",
+          800: "#99cfd6",
+          900: "#cce7eb",
+        },
+        gold: {
+          DEFAULT: "#d4af37",
+          100: "#3a2e0d",
+          200: "#6e5713",
+          300: "#a3821a",
+          400: "#c49b26",
+          500: "#d4af37",
+          600: "#ddc063",
+          700: "#e6d18f",
+          800: "#efe2ba",
+          900: "#f7f0e0",
+        },
+        frosted_blue: {
+          DEFAULT: "#90ddf0",
+          100: "#093843",
+          200: "#126f87",
+          300: "#1ca7ca",
+          400: "#4bc8e7",
+          500: "#90ddf0",
+          600: "#a5e3f3",
+          700: "#bceaf6",
+          800: "#d2f1f9",
+          900: "#e9f8fc",
+        },
+      },
+      fontFamily: {
+        serif: ["var(--font-playfair)", "Playfair Display", "Georgia", "serif"],
+        sans: ["var(--font-outfit)", "Outfit", "Inter", "system-ui", "sans-serif"],
+        mono: ["var(--font-space-mono)", "Space Mono", "monospace"],
+      },
+      boxShadow: {
+        "apple-soft": "0 10px 40px -10px rgba(0, 0, 0, 0.55), 0 1px 0 0 rgba(255, 255, 255, 0.04) inset",
+        "apple-elevated": "0 25px 60px -12px rgba(0, 0, 0, 0.65), 0 4px 16px 0 rgba(0, 0, 0, 0.35)",
+        "apple-card": "0 4px 24px -2px rgba(0, 0, 0, 0.5), 0 2px 8px -1px rgba(0, 0, 0, 0.3)",
+      },
+      borderRadius: {
+        "apple-xl": "1.25rem",
+        "apple-2xl": "1.75rem",
+        "apple-3xl": "2.25rem",
+      },
+      animation: {
+        "fade-in": "fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "float-gentle": "floatGentle 6s ease-in-out infinite",
+        "pulse-slow": "pulseSlow 4s ease-in-out infinite",
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0", transform: "translateY(8px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        floatGentle: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-6px)" },
+        },
+        pulseSlow: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.75" },
+        },
+      },
+    },
+  },
+  plugins: [],
+};
+
+export default config;
