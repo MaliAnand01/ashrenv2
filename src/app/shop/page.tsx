@@ -219,7 +219,10 @@ export default function ShopPage() {
                   </div>
 
                   {/* Product Image Stage */}
-                  <div className="relative w-full h-52 flex items-center justify-center my-3">
+                  <Link
+                    href={`/product/${product.id}`}
+                    className="relative w-full h-52 flex items-center justify-center my-3 cursor-pointer"
+                  >
                     <Image
                       src={product.heroImage}
                       alt={product.name}
@@ -227,7 +230,7 @@ export default function ShopPage() {
                       height={280}
                       className="object-contain max-h-48 w-auto group-hover:scale-105 transition-transform duration-500 drop-shadow-md"
                     />
-                  </div>
+                  </Link>
 
                   {/* Info Block */}
                   <div className="space-y-2 pt-2 border-t border-white/5">
@@ -237,9 +240,11 @@ export default function ShopPage() {
                       <span className="text-white/40 text-[11px]">({product.reviewCount} reviews)</span>
                     </div>
 
-                    <h3 className="font-serif text-base font-bold text-white group-hover:text-amber-400 transition-colors line-clamp-1">
-                      {product.name}
-                    </h3>
+                    <Link href={`/product/${product.id}`}>
+                      <h3 className="font-serif text-base font-bold text-white group-hover:text-amber-400 transition-colors line-clamp-1 cursor-pointer">
+                        {product.name}
+                      </h3>
+                    </Link>
 
                     <p className="text-xs text-white/60 line-clamp-2 leading-relaxed">
                       {product.description}

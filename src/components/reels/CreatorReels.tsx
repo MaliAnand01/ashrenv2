@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ASHREN_CREATOR_REELS } from "@/data/creators";
 import { ASHREN_PRODUCTS } from "@/data/products";
 import { useStore } from "@/context/StoreContext";
@@ -146,41 +147,35 @@ export function CreatorReels() {
                     {reel.title}
                   </p>
 
-                  {/* Tagged Product Box */}
-                  <div
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setQuickViewProduct(taggedProduct);
-                    }}
-                    className="bg-[#121016]/95 hover:bg-[#18151f] border border-white/10 rounded-xl p-2 flex items-center gap-2 transition-colors"
+                  {/* Tagged Product Box - Directly Redirects to PDP Page */}
+                  <Link
+                    href={`/product/${taggedProduct.id}`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="bg-[#121016]/95 hover:bg-[#18151f] border border-white/10 hover:border-amber-400/50 rounded-xl p-2 flex items-center gap-2 transition-colors cursor-pointer group/prod"
                   >
                     <div className="relative w-9 h-9 rounded-lg overflow-hidden bg-white/[0.04] shrink-0">
                       <Image
                         src={reel.taggedProductImage}
                         alt={reel.taggedProductName}
                         fill
-                        className="object-contain p-0.5"
+                        className="object-contain p-0.5 group-hover/prod:scale-105 transition-transform"
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <span className="text-[10px] font-medium text-white truncate block">
+                      <span className="text-[10px] font-medium text-white truncate block group-hover/prod:text-amber-400 transition-colors">
                         {reel.taggedProductName}
                       </span>
                       <span className="text-[11px] font-bold font-mono text-amber-400 block">
                         {formatINR(reel.taggedProductPrice)}
                       </span>
                     </div>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setWhatsAppOrderProduct(taggedProduct);
-                      }}
+                    <div
                       className="p-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black shrink-0 transition-colors"
-                      title="Order on WhatsApp"
+                      title="View Product"
                     >
                       <ShoppingBag className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
+                    </div>
+                  </Link>
                 </div>
 
               </div>
